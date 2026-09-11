@@ -1,0 +1,17 @@
+services:
+  antojos-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: antojos-web
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      ANTOJOS_DB_HOST: ${ANTOJOS_DB_HOST:?set in .env}
+      ANTOJOS_DB_PORT: ${ANTOJOS_DB_PORT:?set in .env}
+      ANTOJOS_DB_NAME: ${ANTOJOS_DB_NAME:?set in .env}
+      ANTOJOS_DB_USER: ${ANTOJOS_DB_USER:?set in .env}
+      ANTOJOS_DB_PASS: ${ANTOJOS_DB_PASS:?set in .env}
+      TZ: America/Bogota
+    volumes:
+      - ./app:/var/www/html
